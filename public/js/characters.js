@@ -34,7 +34,7 @@ const CHARACTERS = {
         emoji: '🦕',
         color: '#7FBF00',
         weight: 'light',
-        stats: { speed: 6, accel: 9, handling: 9, weight: 3, drift: 8, items: 8 },
+        stats: { speed: 10, accel: 10, handling:10, weight: 3, drift: 10, items: 10 },
         karts: ['egg', 'standard', 'light'],
     },
     toad: {
@@ -137,7 +137,7 @@ function getEffectiveStats(charKey, kartKey) {
     }
     // Convert to gameplay units
     return {
-        maxSpeed: 12 + s.speed * 1.6,        // 13.6 – 28
+        maxSpeed: 18 + s.speed * 1.6,        // 13.6 – 28
         acceleration: 0.04 + s.accel * 0.018, // 0.058 – 0.22
         handling: 0.025 + s.handling * 0.004, // 0.029 – 0.065
         weight: s.weight,
