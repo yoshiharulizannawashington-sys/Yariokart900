@@ -3,8 +3,7 @@ JavaScript
 //  server.js – Node.js Express + Socket.io Multiplayer Server
 // ════════════════════════════════════════════════════════════
 const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
+const app = express();
 const path = require('path');
 
 const app = express();
