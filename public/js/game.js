@@ -108,42 +108,34 @@ class Game {
     }
 
     // ── Keyboard Input Handlers ────────────────────────────────
-    setupInput() {
-        const updateKeys = () => {
-            this.inputs.accel = !!(this._keys['ArrowUp'] || this._keys['KeyW']);
-            this.inputs.brake = !!(this._keys['ArrowDown'] || this._keys['KeyS']);
-            this.inputs.left = !!(this._keys['ArrowLeft'] || this._keys['KeyA']);
-            this.inputs.right = !!(this._keys['ArrowRight'] || this._keys['KeyD']);
-            this.inputs.drift = !!(this._keys['KeyZ'] || this._keys['ShiftLeft'] || this._keys['ShiftRight']);
-        };
+ // Inside public/js/game.js
+setupInput() {
+    const updateKeys = () => {
+        this.inputs.accel = !!(this._keys['ArrowUp'] || this._keys['KeyW']);
+        this.inputs.brake = !!(this._keys['ArrowDown'] || this._keys['KeyS']);
+        this.inputs.left = !!(this._keys['ArrowLeft'] || this._keys['KeyA']);
+        this.inputs.right = !!(this._keys['ArrowRight'] || this._keys['KeyD']);
+        this.inputs.drift = !!(this._keys['KeyZ'] || this._keys['ShiftLeft'] || this._keys['ShiftRight']);
+    };
 
-        window.addEventListener('keydown', (e) => {
-            this._keys[e.code] = true;
-            updateKeys();
+    window.addEventListener('keydown', (e) => {
+        this._keys[e.code] = true;
+        updateKeys();
 
-            if (e.code === 'Space') {
-                e.preventDefault();
-                this._onUseItem();
-            }
-            if (e.code === 'Escape') {
-                this.togglePause();
-            }
-        });
-
-        window.addEventListener('keyup', (e) => {
-            this._keys[e.code] = false;
-            updateKeys();
-        });
-    }
-
-    _onUseItem() {
-        if (!this.hud || !this.hud.heldItem) return;
-        const itemType = this.hud.useHeldItem();
-        if (itemType && this.itemManager && this.localKart) {
-            this.itemManager.useItem(this.localKart, itemType);
+        if (e.code === 'Space') {
+            e.preventDefault();
+            this._onUseItem(); // Trigger held item
         }
-    }
+        if (e.code === 'Escape') {
+            this.togglePause(); // Pause menu
+        }
+    });
 
+    window.addEventListener('keyup', (e) => {
+        this._keys[e.code] = false;
+        updateKeys();
+    });
+}
     togglePause() {
         this.paused = !this.paused;
         const overlay = document.getElementById('pause-overlay');
